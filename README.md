@@ -173,14 +173,14 @@ MetaDE employs Differential Evolution (DE) as the evolver to optimize the parame
 
 - **Mutation**: DE's mutation strategies evolve based on feedback from the problem landscape.
 - **Crossover**: Different crossover strategies (binomial, exponential, arithmetic) can be used and adapted.
-  ![Evolver](./assets/evolver.png)
-<img src="./assets/evolver.png" alt="Evolver Image" width="100%">
+<img src="./assets/evolver.png" alt="Evolver Image" width="90%">
 
 ### Executor
 The executor is a **Parameterized Differential Evolution (PDE)**, a variant of DE designed to accommodate various mutation and crossover strategies dynamically.
 
 - **Parameterization**: Flexible mutation strategies like `DE/rand/1/bin` or `DE/best/2/exp` can be selected based on problem characteristics.
 - **Parallel Execution**: Core operations of PDE are optimized for parallel execution on GPUs.
+<img src="./assets/executor.png" alt="Executor Image" width="90%">
 
 ### GPU Acceleration
 MetaDE integrates with the EvoX framework for distributed, GPU-accelerated evolutionary computation, significantly enhancing performance on large-scale optimization tasks.
