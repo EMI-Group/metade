@@ -20,11 +20,11 @@ MetaDE is an advanced evolutionary algorithm framework designed to adaptively op
 
 ## Features
 
-- **Meta-level Evolution**: Uses DE at a meta-level to evolve hyperparameters and strategies of DE applied at a problem-solving level.
-- **Parameterized DE (PDE)**: A customizable variant of DE that offers dynamic mutation and crossover strategies adaptable to different optimization problems.
-- **GPU-accelerated**: Integrated with a GPU-accelerated framework for fast computation of large-scale problems.
-- **End-to-End Optimization**: MetaDE provides a seamless workflow from hyperparameter tuning to solving optimization problems in a fully automated process.
-- **Wide Applicability**: Supports various benchmarks, including CEC2022, and real-world tasks like evolutionary reinforcement learning in robotics.
+- **Meta-level Evolution** 🌱: Uses DE at a meta-level to evolve hyperparameters and strategies of DE applied at a problem-solving level.
+- **Parameterized DE (PDE)** 🛠️: A customizable variant of DE that offers dynamic mutation and crossover strategies adaptable to different optimization problems.
+- **GPU-accelerated** 🚀: Integrated with a GPU-accelerated framework for fast computation of large-scale problems.
+- **End-to-End Optimization** 🔄: MetaDE provides a seamless workflow from hyperparameter tuning to solving optimization problems in a fully automated process.
+- **Wide Applicability** 🤖: Supports various benchmarks, including CEC2022, and real-world tasks like evolutionary reinforcement learning in robotics.
 
 ## RL Tasks Visualization
 Here are demonstrations of MetaDE applied to different simulated robotics environments. In these cases, MetaDE optimizes the parameters of an MLP, which is then used as a policy model to visualize the robot's behavior within the simulation.
@@ -173,6 +173,8 @@ MetaDE employs Differential Evolution (DE) as the evolver to optimize the parame
 
 - **Mutation**: DE's mutation strategies evolve based on feedback from the problem landscape.
 - **Crossover**: Different crossover strategies (binomial, exponential, arithmetic) can be used and adapted.
+  ![Evolver](./assets/evolver.png)
+<img src="./assets/evolver.png" alt="Evolver Image" width="100%">
 
 ### Executor
 The executor is a **Parameterized Differential Evolution (PDE)**, a variant of DE designed to accommodate various mutation and crossover strategies dynamically.
@@ -371,6 +373,11 @@ print(f"Best fitness: {monitor.get_best_fitness()}")
 ## Results
 
 MetaDE has been benchmarked on the CEC2022 suite and applied to various real-world tasks, demonstrating superior performance compared to traditional DE algorithms and other evolutionary methods.
+
+## Community & Support
+
+- Engage in discussions and share your experiences on [GitHub Discussion Board](https://github.com/EMI-Group/evox/discussions).
+- Join our QQ group (ID: 297969717).
 
 [//]: # (## Citing MetaDE)
 
