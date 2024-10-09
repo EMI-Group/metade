@@ -30,10 +30,10 @@ MetaDE is an advanced evolutionary algorithm framework designed to adaptively op
 Here are demonstrations of MetaDE applied to different simulated robotics environments. In these cases, MetaDE optimizes the parameters of an MLP, which is then used as a policy model to visualize the robot's behavior within the simulation.
 <table width="90%">
   <tr>
-    <td width="30%">
+    <td width="45%">
       <img width="100%" style="display:block; margin:auto;" src="./assets/hopper.gif"></img>
     </td>
-    <td width="30%">
+    <td width="45%">
       <img width="100%" style="display:block; margin:auto;" src="./assets/swimmer.gif"></img>
     </td>
   </tr>
@@ -202,7 +202,6 @@ from util import (
 from algorithms import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
 from problems import CEC2022TestSuit
 
-"""Settings"""
 D = 10 
 FUNC_LIST = jnp.arange(12) + 1
 BATCH_SIZE = 100
@@ -219,7 +218,6 @@ tiny_num = 1e-5
 param_lb = jnp.array([0, 0, 0, 0, 1, 0])
 param_ub = jnp.array([1, 1, 4 - tiny_num, 4 - tiny_num, 5 - tiny_num, 3 - tiny_num])
 
-"""Run"""
 evolver = DE(
     lb=param_lb,
     ub=param_ub,
@@ -273,7 +271,6 @@ for func_num in FUNC_LIST:
             last_iter = 1
         steps_iter = i + 1
 
-    """Results"""
     print(f"Best_fitness: {monitor.get_best_fitness()}")
 ```
 
@@ -283,7 +280,7 @@ MetaDE can also be used for real-world tasks like robotic control through evolut
 
 The following animations show the behaviors in Brax environments:
 
-For instance, in controlling a "Swimmer" robot:
+For instance, in controlling a "Hopper" robot:
 ```python
 from tqdm import tqdm
 import problems
@@ -295,7 +292,7 @@ import jax
 from util import StdSOMonitor, StdWorkflow, TreeAndVector, parse_opt_direction
 from algorithms import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
 
-steps = 5
+steps = 20
 pop_size = 100
 key = jax.random.PRNGKey(42)
 
@@ -337,7 +334,7 @@ batch_de = BatchDE(
 base_problem = problems.Brax(
     env_name="hopper",
     policy=jax.jit(model.apply),
-    cap_episode=500,
+    cap_episode=1000,
 )
 
 meta_problem = MetaDE(
@@ -379,25 +376,36 @@ MetaDE has been benchmarked on the CEC2022 suite and applied to various real-wor
 - Engage in discussions and share your experiences on [GitHub Discussion Board](https://github.com/EMI-Group/evox/discussions).
 - Join our QQ group (ID: 297969717).
 
-[//]: # (## Citing MetaDE)
-
-[//]: # ()
-[//]: # (If you use MetaDE in your research and want to cite it in your work, please use:)
+## Citing MetaDE
+To be updated.
 
 [//]: # (```)
 
+[//]: # (If you use MetaDE in your research and want to cite it in your work, please use:)
+
+[//]: # ()
+[//]: # (```)
+
+[//]: # ()
 [//]: # (@article{evox,)
 
+[//]: # ()
 [//]: # (  title = {{MetaDE}: {Evolving} {Differential} {Evolution} by {Differential} {Evolution}},)
 
+[//]: # ()
 [//]: # (  author = {Chen, Minyang and Feng, Chenchen and Cheng, Ran},)
 
+[//]: # ()
 [//]: # (  journal = {IEEE Transactions on Evolutionary Computation},)
 
+[//]: # ()
 [//]: # (  year = 2024,)
 
+[//]: # ()
 [//]: # (  doi = {xx.xxxx/TEVC.2024.xxxxxxx})
 
+[//]: # ()
 [//]: # (})
 
+[//]: # ()
 [//]: # (```)
