@@ -30,11 +30,14 @@ MetaDE is an advanced evolutionary algorithm framework designed to adaptively op
 Here are demonstrations of MetaDE applied to different simulated robotics environments. In these cases, MetaDE optimizes the parameters of an MLP, which is then used as a policy model to visualize the robot's behavior within the simulation.
 <table width="90%">
   <tr>
-    <td width="45%">
-      <img width="100%" style="display:block; margin:auto;" src="./assets/hopper.gif"></img>
+    <td width="30%">
+      <img width="100%" style="display:block; margin:auto; width:300px; height:300px;" src="./assets/hopper.gif">
     </td>
-    <td width="45%">
-      <img width="100%" style="display:block; margin:auto;" src="./assets/swimmer.gif"></img>
+    <td width="30%">
+      <img width="100%" style="display:block; margin:auto; width:300px; height:300px;" src="./assets/swimmer.gif">
+    </td>
+    <td width="30%">
+      <img width="100%" style="display:block; margin:auto; width:300px; height:300px;" src="./assets/reacher.gif">
     </td>
   </tr>
   <tr>
@@ -44,13 +47,16 @@ Here are demonstrations of MetaDE applied to different simulated robotics enviro
     <td align="center">
       Swimmer
     </td>
+    <td align="center">
+      Reacher
+    </td>
   </tr>
 </table>
 
 
 - Hopper: Aiming for maximum speed and jumping height.
 - Swimmer: Enhancing movement efficiency in fluid environments.
-
+- Reacher: Moving the fingertip to a random target.
 ## Requirements
 TensorRVEA requires:
 - evox (version >= 0.6.0)
