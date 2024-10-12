@@ -1,8 +1,6 @@
 import jax.numpy as jnp
 import jax
-
 from tqdm import tqdm
-
 from util import (
     StdSOMonitor,
     StdWorkflow

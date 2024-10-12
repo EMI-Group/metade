@@ -1,11 +1,9 @@
 import jax.numpy as jnp
 import jax
-import time
 from tqdm import tqdm
-
 from util import StdSOMonitor, StdWorkflow
 from algorithms import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
-from evox import problems
+from evox import problems  # You can import any problem from evox.problems
 
 """Settings"""
 # Problem setting

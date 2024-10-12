@@ -4,7 +4,6 @@ from jax import random
 from flax import linen as nn
 import jax.numpy as jnp
 import jax
-import imageio
 from util import StdSOMonitor, StdWorkflow, TreeAndVector, parse_opt_direction
 from algorithms import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
 
