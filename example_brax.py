@@ -11,6 +11,7 @@ steps = 20
 pop_size = 100
 key = jax.random.PRNGKey(42)
 
+
 class HopperPolicy(nn.Module):
     @nn.compact
     def __call__(self, x):
@@ -24,6 +25,7 @@ class HopperPolicy(nn.Module):
         x = nn.tanh(x)
         return x
 
+
 model = HopperPolicy()
 weights = model.init(random.PRNGKey(42), jnp.zeros((11,)))
 adapter = TreeAndVector(weights)
@@ -36,7 +38,9 @@ algorithm = DE(
     lb=param_lb,
     ub=param_ub,
     pop_size=pop_size,
-    base_vector="rand", differential_weight=0.5, cross_probability=0.9
+    base_vector="rand",
+    differential_weight=0.5,
+    cross_probability=0.9,
 )
 
 BatchDE = create_batch_algorithm(ParamDE, pop_size, 1)
@@ -80,5 +84,3 @@ for i in tqdm(range(steps)):
     state = workflow.step(state)
 
 print(monitor.get_best_fitness())
-
-
