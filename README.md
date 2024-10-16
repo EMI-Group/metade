@@ -16,7 +16,7 @@
 <!-- The paper link is waiting to be added.  -->
 
 
-MetaDE is an advanced evolutionary algorithm framework designed to adaptively optimize Differential Evolution (DE) strategies and hyperparameters using DE itself. MetaDE enables dynamic optimization of mutation and crossover strategies across diverse problem landscapes and leverages GPU-accelerated computations to maximize performance. The framework is built on the principles of meta-evolution, where DE evolves its configurations to optimize complex black-box problems more efficiently.
+MetaDE is an advanced evolutionary framework that dynamically optimizes the strategies and hyperparameters of Differential Evolution (DE) through meta-level evolution. By leveraging DE to fine-tune its own configurations, MetaDE adapts mutation and crossover strategies to suit varying problem landscapes in real-time. With GPU acceleration, it handles large-scale, complex black-box optimization problems efficiently, delivering faster convergence and superior performance. MetaDE is compatible with the <a href="https://github.com/EMI-Group/evox">EvoX</a> framework.
 
 ## Features
 
