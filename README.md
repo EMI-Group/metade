@@ -92,7 +92,6 @@ Here’s a quick example of how to run a MetaDE optimization on a benchmark prob
 ```python
 import jax.numpy as jnp
 import jax
-import time
 from tqdm import tqdm
 
 from util import StdSOMonitor, StdWorkflow
