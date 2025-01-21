@@ -58,8 +58,8 @@ Here are demonstrations of MetaDE applied to different simulated robotics enviro
 - Swimmer: Enhancing movement efficiency in fluid environments.
 - Reacher: Moving the fingertip to a random target.
 ## Requirements
-TensorRVEA requires:
-- evox (version >= 0.6.0)
+MetaDE requires:
+- evox (version == 0.6.0)
 - jax (version >= 0.4.16)
 - jaxlib (version >= 0.3.0)
 - brax (version == 0.10.3)
