@@ -9,7 +9,7 @@
   <br>
 </h1>
 
-<p align="center" style="font-size: 1.7em;">
+<p align="center" style="font-size: 2em;">
 🌟 MetaDE: Evolving Differential Evolution by Differential Evolution 🌟
 </p>
 
