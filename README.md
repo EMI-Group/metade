@@ -1,5 +1,3 @@
-# MetaDE: Evolving Differential Evolution by Differential Evolution
-
 <h1 align="center">
   <a href="https://github.com/EMI-Group/evox">
   <picture>
@@ -11,7 +9,7 @@
   <br>
 </h1>
 
-<p align="center">
+<p align="center" style="font-size: 1.7em;">
 🌟 MetaDE: Evolving Differential Evolution by Differential Evolution 🌟
 </p>
 
