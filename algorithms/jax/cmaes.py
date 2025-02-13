@@ -25,7 +25,7 @@ import jax.numpy as jnp
 from jax import lax
 
 from util import Algorithm, State, jit_class
-from .sort_utils import sort_by_key
+from algorithms.jax.sort_utils import sort_by_key
 
 
 @jit_class

@@ -2,8 +2,8 @@ import jax.numpy as jnp
 import jax
 from tqdm import tqdm
 from util import StdSOMonitor, StdWorkflow
-from algorithms import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
-from problems import CEC2022TestSuit
+from algorithms.jax import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
+from problems.jax import CEC2022TestSuit
 
 ## Problem setting
 D = 10  # * 10D 20D

@@ -5,7 +5,7 @@ import jax.numpy as jnp
 import jax
 import problems
 from util import StdSOMonitor, StdWorkflow, TreeAndVector, parse_opt_direction
-from algorithms import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
+from algorithms.jax import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
 
 steps = 20
 pop_size = 100
@@ -50,10 +50,10 @@ batch_de = BatchDE(
     pop_size=100,
 )
 
-base_problem = problems.Brax(
+base_problem = problems.jax.Brax(
     env_name="hopper",
     policy=jax.jit(model.apply),
-    cap_episode=1000,
+    cap_episode=500,
 )
 
 meta_problem = MetaDE(

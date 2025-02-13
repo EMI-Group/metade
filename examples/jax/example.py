@@ -2,8 +2,9 @@ import jax.numpy as jnp
 import jax
 from tqdm import tqdm
 from util import StdSOMonitor, StdWorkflow
-from algorithms import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
-from evox import problems  # You can import any problem from evox.problems
+from algorithms.jax import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
+from problems.jax import Ackley, \
+    Sphere  # You can import any problem from evox.problems(evox>=0.6.0&&evo<=0.8.1) or easily create your own problem
 
 # Problem setting
 D = 10  # Dimension of the problem
@@ -45,7 +46,7 @@ batch_de = BatchDE(
 )
 
 # Problem to solve
-base_problem = problems.numerical.Ackley()
+base_problem = Sphere()
 decoder = decoder_de
 
 key = jax.random.PRNGKey(key_start)

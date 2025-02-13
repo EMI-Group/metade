@@ -109,7 +109,7 @@ class Brax(Problem):
         else:
             return ([image.render_array(
                 sys=self.env.sys,
-                trajectory=trajectory,  # 传入整个trajectory或单个state
+                trajectory=trajectory,
                 **kwargs,
                 camera='track'
             )], state)

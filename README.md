@@ -1,3 +1,5 @@
+# MetaDE: Evolving Differential Evolution by Differential Evolution
+
 <h1 align="center">
   <a href="https://github.com/EMI-Group/evox">
   <picture>
@@ -15,19 +17,26 @@
 
 <!-- The paper link is waiting to be added.  -->
 
-
 MetaDE is an advanced evolutionary framework that dynamically optimizes the strategies and hyperparameters of Differential Evolution (DE) through meta-level evolution. By leveraging DE to fine-tune its own configurations, MetaDE adapts mutation and crossover strategies to suit varying problem landscapes in real-time. With GPU acceleration, it handles large-scale, complex black-box optimization problems efficiently, delivering faster convergence and superior performance. MetaDE is compatible with the <a href="https://github.com/EMI-Group/evox">EvoX</a> framework.
+
+> **New in this version**:  
+> MetaDE now supports both **JAX** and **PyTorch** backends.  
+> - If you want to run **PyTorch-based** code, please install the GPU-enabled PyTorch (if GPU acceleration is desired) along with EvoX ≥ **1.0.0**.  
+> - Important: The PyTorch version currently does **not** support Brax-based RL tasks. If you need Brax support (or wish to use the version from the paper experiments), please use the JAX backend with a CUDA-enabled JAX (and Brax) installation.
 
 ## Features
 
 - **Meta-level Evolution** 🌱: Uses DE at a meta-level to evolve hyperparameters and strategies of DE applied at a problem-solving level.
 - **Parameterized DE (PDE)** 🛠️: A customizable variant of DE that offers dynamic mutation and crossover strategies adaptable to different optimization problems.
-- **GPU-accelerated** 🚀: Integrated with a GPU-accelerated framework for fast computation of large-scale problems.
+- **Multi-Backend Support** 🔥: Provides both JAX and PyTorch implementations for broader hardware/software compatibility.
+- **GPU-Accelerated** 🚀: Integrated with GPU acceleration on both JAX and PyTorch, enabling efficient large-scale optimizations.
 - **End-to-End Optimization** 🔄: MetaDE provides a seamless workflow from hyperparameter tuning to solving optimization problems in a fully automated process.
 - **Wide Applicability** 🤖: Supports various benchmarks, including CEC2022, and real-world tasks like evolutionary reinforcement learning in robotics.
 
 ## RL Tasks Visualization
+
 Here are demonstrations of MetaDE applied to different simulated robotics environments. In these cases, MetaDE optimizes the parameters of an MLP, which is then used as a policy model to visualize the robot's behavior within the simulation.
+
 <table width="90%">
   <tr>
     <td width="30%">
@@ -53,50 +62,101 @@ Here are demonstrations of MetaDE applied to different simulated robotics enviro
   </tr>
 </table>
 
+- **Hopper**: Aiming for maximum speed and jumping height.  
+- **Swimmer**: Enhancing movement efficiency in fluid environments.  
+- **Reacher**: Moving the fingertip to a random target.
 
-- Hopper: Aiming for maximum speed and jumping height.
-- Swimmer: Enhancing movement efficiency in fluid environments.
-- Reacher: Moving the fingertip to a random target.
 ## Requirements
-MetaDE requires:
-- evox (version == 0.6.0)
-- jax (version >= 0.4.16)
-- jaxlib (version >= 0.3.0)
-- brax (version == 0.10.3)
 
+Depending on which backend you plan to use (JAX or PyTorch), you should install the proper libraries and GPU dependencies:
+
+- **Common**:
+  - [evox](https://github.com/EMI-Group/evox) (version **≥ 1.0.0** for PyTorch support)
+  
+- **JAX**-based version:
+  - `jax >= 0.4.16`
+  - `jaxlib >= 0.3.0`
+  - `brax == 0.10.3` (optional, if you want to run Brax RL problems)
+
+- **PyTorch**-based version:
+  - `torch` (GPU version recommended, e.g. `torch>=2.5.0`)
+  - `torchvision`, `torchaudio` (optional, depending on your environment/needs)
 
 ## Installation
-1. Install the correct version of [JAX](https://github.com/google/jax). We recommend `jax >= 0.4.16`.
 
-For cpu version only, you may use:
-```
-pip install -U jax
-```
+You can install MetaDE with either the JAX or PyTorch backend (or both).  
+Below are some example installation steps; please adapt versions as needed:
 
-For nvidia gpus, you may use:
-```
-pip install -U "jax[cuda12]"
-```
-For details of installing jax, please check https://github.com/google/jax.
+### Option A: Install for PyTorch Only
+
+1. **Install [PyTorch](https://pytorch.org/get-started/locally/)** (with CUDA, if you want GPU acceleration). For example, if you have CUDA 11.8, you might do:
+   ```bash
+   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+2. **Install EvoX ≥ 1.0.0** (for PyTorch support):
+   ```bash
+   pip install git+https://github.com/EMI-Group/evox.git@v1.0.1
+3. **Install MetaDE**:
+   ```bash
+   pip install git+https://github.com/EMI-Group/metade.git
+   ```
+
+### Option B: Install for JAX Only
+
+1. **Install [JAX](https://github.com/google/jax)**. We recommend `jax >= 0.4.16`.
+
+    For cpu version only, you may use:
+    ```bash
+    pip install -U jax
+    ```
+    For nvidia gpus, you may use:
+    ```bash
+    pip install -U jax[cuda12]
+    ```
+    For details of installing jax, please check https://github.com/google/jax.
+2. **Install EvoX ≥ 1.0.0** (for PyTorch support):
+   ```bash
+   pip install git+https://github.com/EMI-Group/evox.git@v1.0.1
+3. **Install MetaDE**:
+   ```bash
+   pip install git+https://github.com/EMI-Group/metade.git
+   ```
+4. **Install Brax**(Optional, if you want to solve Brax RL problems):
+   ```bash
+   pip install brax==0.10.3
+   ```
 
 
-2. Install `metade` from the GitHub source code:
-```
-pip install git+https://github.com/EMI-Group/metade.git
-```
 
-## Quickstart Guide
+## Components
 
-Here’s a quick example of how to run a MetaDE optimization on a benchmark problem(Ackley):
+### Evolver
+MetaDE employs Differential Evolution (DE) as the evolver to optimize the parameters of its executor.
 
+- **Mutation**: DE's mutation strategies evolve based on feedback from the problem landscape.
+- **Crossover**: Different crossover strategies (binomial, exponential, arithmetic) can be used and adapted.
+<img src="./assets/evolver.png" alt="Evolver Image" width="90%">
+
+### Executor
+The executor is a **Parameterized Differential Evolution (PDE)**, a variant of DE designed to accommodate various mutation and crossover strategies dynamically.
+
+- **Parameterization**: Flexible mutation strategies like `DE/rand/1/bin` or `DE/best/2/exp` can be selected based on problem characteristics.
+- **Parallel Execution**: Core operations of PDE are optimized for parallel execution on GPUs(via JAX or PyTorch).
+<img src="./assets/executor.png" alt="Executor Image" width="90%">
+
+### GPU Acceleration
+MetaDE integrates with the EvoX framework for distributed, GPU-accelerated evolutionary computation, significantly enhancing performance on large-scale optimization tasks.
+
+## Examples
+
+### Global Optimization Benchmark Functions
 ```python
 import jax.numpy as jnp
 import jax
 from tqdm import tqdm
 
 from util import StdSOMonitor, StdWorkflow
-from algorithms import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
-from evox import problems
+from algorithms.jax import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
+from problems.jax.sphere import Sphere
 
 D = 10
 BATCH_SIZE = 100
@@ -129,7 +189,7 @@ batch_de = BatchDE(
     pop_size=BASE_ALG_POP_SIZE,
 )
 
-base_problem = problems.numerical.Ackley()
+base_problem = Sphere()
 decoder = decoder_de
 key = jax.random.PRNGKey(key_start)
 
@@ -168,33 +228,12 @@ for step in tqdm(range(STEPS)):
         last_iter = True
 
 print(f"Best fitness: {monitor.get_best_fitness()}")
-
 ```
+> If you want to use the PyTorch backend, please refer to the PyTorch examples under `examples/pytorch/example.py` in this repository.
 
-## Components
+### CEC Benchmark Problems
 
-### Evolver
-MetaDE employs Differential Evolution (DE) as the evolver to optimize the parameters of its executor.
-
-- **Mutation**: DE's mutation strategies evolve based on feedback from the problem landscape.
-- **Crossover**: Different crossover strategies (binomial, exponential, arithmetic) can be used and adapted.
-<img src="./assets/evolver.png" alt="Evolver Image" width="90%">
-
-### Executor
-The executor is a **Parameterized Differential Evolution (PDE)**, a variant of DE designed to accommodate various mutation and crossover strategies dynamically.
-
-- **Parameterization**: Flexible mutation strategies like `DE/rand/1/bin` or `DE/best/2/exp` can be selected based on problem characteristics.
-- **Parallel Execution**: Core operations of PDE are optimized for parallel execution on GPUs.
-<img src="./assets/executor.png" alt="Executor Image" width="90%">
-
-### GPU Acceleration
-MetaDE integrates with the EvoX framework for distributed, GPU-accelerated evolutionary computation, significantly enhancing performance on large-scale optimization tasks.
-
-## Examples
-
-### Benchmark Problems
-
-MetaDE supports several benchmark suites such as CEC2022. Here's an example to run it on the CEC2022 test suite:
+MetaDE supports several benchmark suites such as CEC2022. Here’s an example (JAX-based) for the CEC2022 test suite:
 
 ```python
 import jax.numpy as jnp
@@ -204,8 +243,8 @@ from util import (
     StdSOMonitor,
     StdWorkflow
 )
-from algorithms import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
-from problems import CEC2022TestSuit
+from algorithms.jax import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
+from problems.jax import CEC2022TestSuit
 
 D = 10 
 FUNC_LIST = jnp.arange(12) + 1
@@ -278,14 +317,11 @@ for func_num in FUNC_LIST:
 
     print(f"Best_fitness: {monitor.get_best_fitness()}")
 ```
-
+> If you want to use the PyTorch backend, please refer to the PyTorch examples under `examples/pytorch/example_cec2022.py` in this repository.
+> 
 ### Robotics Control (Evolutionary Reinforcement Learning)
 
-MetaDE can also be used for real-world tasks like robotic control through evolutionary reinforcement learning.Here are some results:
-
-The following animations show the behaviors in Brax environments:
-
-For instance, in controlling a "Hopper" robot:
+MetaDE can also be used for real-world tasks like robotic control through evolutionary reinforcement learning. Note that running these examples requires installing CUDA-enabled JAX and `brax==0.10.3`.
 ```python
 from tqdm import tqdm
 import problems
@@ -295,7 +331,7 @@ import jax.numpy as jnp
 import jax
 
 from util import StdSOMonitor, StdWorkflow, TreeAndVector, parse_opt_direction
-from algorithms import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
+from algorithms.jax import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
 
 steps = 20
 pop_size = 100
@@ -336,10 +372,10 @@ batch_de = BatchDE(
     pop_size=100,
 )
 
-base_problem = problems.Brax(
+base_problem = problems.jax.Brax(
     env_name="hopper",
     policy=jax.jit(model.apply),
-    cap_episode=1000,
+    cap_episode=500,
 )
 
 meta_problem = MetaDE(
@@ -360,7 +396,7 @@ workflow = StdWorkflow(
     pop_transform=decoder_de,
     record_pop=True,
 )
-
+monitor.set_opt_direction(parse_opt_direction("max"))
 key, _ = jax.random.split(key)
 state = workflow.init(key)
 
@@ -372,9 +408,6 @@ for i in tqdm(range(steps)):
 print(f"Best fitness: {monitor.get_best_fitness()}")
 ```
 
-## Results
-
-MetaDE has been benchmarked on the CEC2022 suite and applied to various real-world tasks, demonstrating superior performance compared to traditional DE algorithms and other evolutionary methods.
 
 ## Community & Support
 
@@ -383,34 +416,3 @@ MetaDE has been benchmarked on the CEC2022 suite and applied to various real-wor
 
 ## Citing MetaDE
 To be updated.
-
-[//]: # (```)
-
-[//]: # (If you use MetaDE in your research and want to cite it in your work, please use:)
-
-[//]: # ()
-[//]: # (```)
-
-[//]: # ()
-[//]: # (@article{evox,)
-
-[//]: # ()
-[//]: # (  title = {{MetaDE}: {Evolving} {Differential} {Evolution} by {Differential} {Evolution}},)
-
-[//]: # ()
-[//]: # (  author = {Chen, Minyang and Feng, Chenchen and Cheng, Ran},)
-
-[//]: # ()
-[//]: # (  journal = {IEEE Transactions on Evolutionary Computation},)
-
-[//]: # ()
-[//]: # (  year = 2024,)
-
-[//]: # ()
-[//]: # (  doi = {xx.xxxx/TEVC.2024.xxxxxxx})
-
-[//]: # ()
-[//]: # (})
-
-[//]: # ()
-[//]: # (```)
