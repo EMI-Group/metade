@@ -407,6 +407,7 @@ for i in tqdm(range(steps)):
 
 print(f"Best fitness: {monitor.get_best_fitness()}")
 ```
+> Pytorch-based MetaDE does not support Brax problem yet currently.
 
 
 ## Community & Support
