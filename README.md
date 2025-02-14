@@ -11,10 +11,10 @@
 
 <p align="center">
   <picture>
-    <img src="./assets/D10.svg" alt="" height="450">
+    <img src="./assets/D10.svg" alt="" height="350">
   </picture>
   <picture>
-    <img src="./assets/brax_all_convergence.svg" alt="" height="450">
+    <img src="./assets/brax_all_convergence.svg" alt="" height="350">
   </picture>
 </p>
 
