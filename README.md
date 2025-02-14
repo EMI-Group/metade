@@ -42,18 +42,20 @@ MetaDE is an advanced evolutionary framework that dynamically optimizes the stra
 
 ## RL Tasks Visualization
 
-Here are demonstrations of MetaDE applied to different simulated robotics environments. In these cases, MetaDE optimizes the parameters of an MLP, which is then used as a policy model to visualize the robot's behavior within the simulation.
+Here are demonstrations of MetaDE applied to different simulated robotics environments.
 
-<table width="90%">
+In these cases, MetaDE optimizes the parameters of an MLP, which is then used as a policy model to visualize the robot's behavior within the simulation.
+
+<table width="75%">
   <tr>
-    <td width="30%">
-      <img width="100%" style="display:block; margin:auto; width:300px; height:300px;" src="./assets/hopper.gif">
+    <td width="25%">
+      <img width="100%" style="display:block; margin:auto;"  src="./assets/hopper.gif">
     </td>
-    <td width="30%">
-      <img width="100%" style="display:block; margin:auto; width:300px; height:300px;" src="./assets/swimmer.gif">
+    <td width="25%">
+      <img width="100%" style="display:block; margin:auto;" src="./assets/swimmer.gif">
     </td>
-    <td width="30%">
-      <img width="100%" style="display:block; margin:auto; width:300px; height:300px;" src="./assets/reacher.gif">
+    <td width="25%">
+      <img width="100%" style="display:block; margin:auto;" src="./assets/reacher.gif">
     </td>
   </tr>
   <tr>
