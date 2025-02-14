@@ -87,9 +87,9 @@ Below are some example installation steps; please adapt versions as needed:
 
 ### Option A: Install for PyTorch Only
 
-1. **Install [PyTorch](https://pytorch.org/get-started/locally/)** (with CUDA, if you want GPU acceleration). For example, if you have CUDA 11.8, you might do:
+1. **Install [PyTorch](https://pytorch.org/get-started/locally/)** (with CUDA, if you want GPU acceleration). For example, if you have CUDA 12.4, you might do:
    ```bash
-   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 2. **Install EvoX ≥ 1.0.0** (for PyTorch support):
    ```bash
    pip install git+https://github.com/EMI-Group/evox.git@v1.0.1
