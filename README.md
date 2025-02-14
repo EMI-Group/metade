@@ -9,9 +9,9 @@
   <br>
 </h1>
 
-<p align="center" style="font-size: 3em;">
-🌟 MetaDE: Evolving Differential Evolution by Differential Evolution 🌟
-</p>
+<h1 align="center">
+  🌟 MetaDE: Evolving Differential Evolution by Differential Evolution 🌟
+</h1>
 
 <!-- The paper link is waiting to be added.  -->
 
