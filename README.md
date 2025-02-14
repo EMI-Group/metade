@@ -9,6 +9,15 @@
   <br>
 </h1>
 
+<p align="center">
+  <picture>
+    <img src="./assets/D10.pdf" alt="" height="180">
+  </picture>
+  <picture>
+    <img src="./assets/brax_all_convergence.pdf" alt="" height="180">
+  </picture>
+</p>
+
 <h2 align="center">
   🌟 MetaDE: Evolving Differential Evolution by Differential Evolution 🌟
 </h2>
