@@ -9,6 +9,7 @@
   <br>
 </h1>
 
+<!--
 <p align="center">
   <picture>
     <img src="./assets/D10_3.svg" alt="" height="300">
@@ -17,6 +18,7 @@
     <img src="./assets/brax_all_convergence.svg" alt="" height="300">
   </picture>
 </p>
+-->
 
 <h2 align="center">
   🌟 MetaDE: Evolving Differential Evolution by Differential Evolution 🌟
