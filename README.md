@@ -49,13 +49,13 @@ The following animations show the behaviors in Brax environments:
 <table width="81%">
   <tr>
     <td width="27%">
-      <img width="100%" style="display:block; margin:auto;"  src="./assets/hopper.gif">
+      <img width="200" height="200" style="display:block; margin:auto;"  src="./assets/hopper.gif">
     </td>
     <td width="27%">
-      <img width="100%" style="display:block; margin:auto;" src="./assets/swimmer.gif">
+      <img width="200" height="200" style="display:block; margin:auto;" src="./assets/swimmer.gif">
     </td>
     <td width="27%">
-      <img width="100%" height="auto" style="display:block; margin:auto;" src="./assets/reacher.gif">
+      <img width="200" height="200" style="display:block; margin:auto;" src="./assets/reacher.gif">
     </td>
   </tr>
   <tr>
