@@ -46,15 +46,15 @@ Using the MetaDE algorithm to solve RL tasks.
 
 The following animations show the behaviors in Brax environments:
 
-<table width="75%">
+<table width="81%">
   <tr>
-    <td width="25%">
+    <td width="27%">
       <img width="100%" style="display:block; margin:auto;"  src="./assets/hopper.gif">
     </td>
-    <td width="25%">
+    <td width="27%">
       <img width="100%" style="display:block; margin:auto;" src="./assets/swimmer.gif">
     </td>
-    <td width="25%">
+    <td width="27%">
       <img width="100%" style="display:block; margin:auto;" src="./assets/reacher.gif">
     </td>
   </tr>
