@@ -426,7 +426,7 @@ print(f"Best fitness: {monitor.get_best_fitness()}")
 
 ## Citing MetaDE
 ```
-@article{evox,
+@article{metade,
   title = {{MetaDE}: Evolving Differential Evolution by Differential Evolution},
   author = {Chen, Minyang and Feng, Chenchen and Cheng, Ran},
   journal = {IEEE Transactions on Evolutionary Computation},
