@@ -425,4 +425,12 @@ print(f"Best fitness: {monitor.get_best_fitness()}")
 - Join our QQ group (ID: 297969717).
 
 ## Citing MetaDE
-To be updated.
+```
+@article{evox,
+  title = {{MetaDE}: Evolving Differential Evolution by Differential Evolution},
+  author = {Chen, Minyang and Feng, Chenchen and Cheng, Ran},
+  journal = {IEEE Transactions on Evolutionary Computation},
+  year = 2025,
+  doi = {10.1109/TEVC.2025.3541587}
+}
+```
