@@ -55,7 +55,7 @@ The following animations show the behaviors in Brax environments:
       <img width="100%" style="display:block; margin:auto;" src="./assets/swimmer.gif">
     </td>
     <td width="27%">
-      <img width="100%" style="display:block; margin:auto;" src="./assets/reacher.gif">
+      <img width="100%" height="auto" style="display:block; margin:auto;" src="./assets/reacher.gif">
     </td>
   </tr>
   <tr>
