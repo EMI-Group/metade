@@ -21,10 +21,11 @@
 -->
 
 <h2 align="center">
-  🌟 MetaDE: Evolving Differential Evolution by Differential Evolution 🌟
+  <p>🌟 MetaDE: Evolving Differential Evolution by Differential Evolution 🌟</p>
+  <a href="https://arxiv.org/abs/2502.10470">
+    <img src="https://img.shields.io/badge/paper-arxiv-red?style=for-the-badge" alt="MetaDE Paper on arXiv">
+  </a>
 </h2>
-
-<!-- The paper link is waiting to be added.  -->
 
 MetaDE is an advanced evolutionary framework that dynamically optimizes the strategies and hyperparameters of Differential Evolution (DE) through meta-level evolution. By leveraging DE to fine-tune its own configurations, MetaDE adapts mutation and crossover strategies to suit varying problem landscapes in real-time. With GPU acceleration, it handles large-scale, complex black-box optimization problems efficiently, delivering faster convergence and superior performance. MetaDE is compatible with the <a href="https://github.com/EMI-Group/evox">EvoX</a> framework.
 
