@@ -31,7 +31,7 @@ MetaDE is an advanced evolutionary framework that dynamically optimizes the stra
 
 > **New in this version**:  
 > MetaDE now supports both **JAX** and **PyTorch** backends.  
-> - If you want to run **PyTorch-based** code, please install the GPU-enabled PyTorch (if GPU acceleration is desired) along with EvoX ≥ **1.0.0**.  
+> - If you want to run **PyTorch-based** code, please install the GPU-enabled PyTorch (if GPU acceleration is desired) along with EvoX == **1.0.1**.  
 > - Important: The PyTorch version currently does **not** support Brax-based RL tasks. If you need Brax support (or wish to use the version from the paper experiments), please use the JAX backend with a CUDA-enabled JAX (and Brax) installation.
 
 ## Features
@@ -83,7 +83,7 @@ The following animations show the behaviors in Brax environments:
 Depending on which backend you plan to use (JAX or PyTorch), you should install the proper libraries and GPU dependencies:
 
 - **Common**:
-  - [evox](https://github.com/EMI-Group/evox) (version **≥ 1.0.0** for PyTorch support)
+  - [evox](https://github.com/EMI-Group/evox) (version **== 1.0.1** for PyTorch support)
   
 - **JAX**-based version:
   - `jax >= 0.4.16`
@@ -104,7 +104,7 @@ Below are some example installation steps; please adapt versions as needed:
 1. **Install [PyTorch](https://pytorch.org/get-started/locally/)** (with CUDA, if you want GPU acceleration). For example, if you have CUDA 12.4, you might do:
    ```bash
    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-2. **Install EvoX ≥ 1.0.0** (for PyTorch support):
+2. **Install EvoX == 1.0.1** (for PyTorch support):
    ```bash
    pip install git+https://github.com/EMI-Group/evox.git@v1.0.1
 3. **Install MetaDE**:
@@ -125,7 +125,7 @@ Below are some example installation steps; please adapt versions as needed:
     pip install -U jax[cuda12]
     ```
     For details of installing jax, please check https://github.com/google/jax.
-2. **Install EvoX ≥ 1.0.0** (for PyTorch support):
+2. **Install EvoX == 1.0.1** (for PyTorch support):
    ```bash
    pip install git+https://github.com/EMI-Group/evox.git@v1.0.1
 3. **Install MetaDE**:

@@ -1,8 +1,8 @@
 import torch
-from evox.algorithms.de_variants.de import DE
+from algorithms.pytorch.de import DE
 from algorithms.pytorch.param_de import ParamDE
-from evox.problems.hpo_wrapper import HPOFitnessMonitor, HPOProblemWrapper
-from evox.workflows import EvalMonitor, StdWorkflow
+from problems.torch.hpo_wrapper import HPOFitnessMonitor, HPOProblemWrapper
+from util.workflows import EvalMonitor, StdWorkflow
 from problems.torch.cec2022 import CEC2022  # Follow the original code, fitness minimum is 300, 400...
 from tqdm import tqdm
 

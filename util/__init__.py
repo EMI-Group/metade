@@ -10,3 +10,4 @@ from .standard import *
 from .std_so_monitor import StdSOMonitor
 from .common import *
 from .parameters_and_vector import ParamsAndVector
+from .jit_fix_operator import *

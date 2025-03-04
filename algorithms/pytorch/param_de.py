@@ -1,52 +1,16 @@
-from typing import Dict, Any, Tuple
-
 import torch
-from evox.core import Algorithm, Mutable, jit_class, Parameter, _vmap_fix
-from evox.utils import clamp
-
-from evox.operators.crossover import (
+from evox.core import Algorithm, Mutable, Parameter
+from util import clamp
+from util.operators.crossover import (
+    DE_differential_sum,
     DE_arithmetic_recombination,
     DE_binary_crossover,
     DE_exponential_crossover,
 )
-from evox.operators.selection import select_rand_pbest
+from util.operators.selection import select_rand_pbest
 
-def DE_differential_sum(
-    diff_padding_num: int, num_diff_vectors: torch.Tensor, index: torch.Tensor, population: torch.Tensor
-) -> Tuple[torch.Tensor, torch.Tensor]:
-    """
-    Computes the difference vectors' sum in differential evolution.
 
-    :param diff_padding_num: The number of padding difference vectors.
-    :param num_diff_vectors: The number of difference vectors used in mutation.
-    :param index: The index of current individual.
-    :param population: The population tensor.
 
-    :return: The difference sum and the index of first difference vector.
-    """
-    device = population.device
-    pop_size = population.size(0)
-    if num_diff_vectors.ndim == 0:
-        num_diff_vectors = num_diff_vectors.unsqueeze(0)
-
-    select_len = num_diff_vectors.unsqueeze(1) * 2 + 1
-    rand_indices = torch.randint(0, pop_size, (pop_size, diff_padding_num), device=device)
-    rand_indices = torch.where(rand_indices == index.unsqueeze(1), torch.tensor(pop_size - 1, device=device), rand_indices)
-
-    # pop_permute = population[rand_indices]
-    pop_permute = population.index_select(0, rand_indices.flatten())#.unflatten(0, (pop_size, diff_padding_num))
-    # TEMP
-    pop_permute = _vmap_fix.unwrap_batch_tensor(pop_permute)[0].unflatten(1, (pop_size, diff_padding_num))
-    pop_permute = _vmap_fix.wrap_batch_tensor(pop_permute, (0,))
-    # TEMP END
-    mask = torch.arange(diff_padding_num, device=device).unsqueeze(0) < select_len
-    pop_permute_padding = torch.where(mask.unsqueeze(2), pop_permute, torch.zeros_like(pop_permute))
-
-    diff_vectors = pop_permute_padding[:, 1:]
-    difference_sum = diff_vectors[:, 0::2].sum(dim=1) - diff_vectors[:, 1::2].sum(dim=1)
-    return difference_sum, rand_indices[:, 0]
-
-@jit_class
 class ParamDE(Algorithm):
 
     def __init__(
