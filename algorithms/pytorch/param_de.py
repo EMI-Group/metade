@@ -10,7 +10,6 @@ from util.operators.crossover import (
 from util.operators.selection import select_rand_pbest
 
 
-
 class ParamDE(Algorithm):
 
     def __init__(
@@ -27,17 +26,14 @@ class ParamDE(Algorithm):
             cross_strategy: int = 2,
             device: torch.device | None = None,
     ):
-
         super().__init__()
         device = torch.get_default_device() if device is None else device
 
         self.pop_size = pop_size
         self.dim = lb.shape[0]
-        # 将 lb 和 ub 转换为形状 [1, dim] 的 tensor，并移动至指定设备
         self.lb = lb[None, :].to(device=device)
         self.ub = ub[None, :].to(device=device)
         self.diff_padding_num = diff_padding_num
-
 
         self.differential_weight = Parameter(differential_weight, device=device)
         self.cross_probability = Parameter(cross_probability, device=device)
@@ -50,7 +46,6 @@ class ParamDE(Algorithm):
         pop = pop * (self.ub - self.lb) + self.lb
         self.pop = Mutable(pop)
         self.fit = Mutable(torch.full((pop_size,), float("inf"), device=device))
-
 
     def init_step(self):
         """
@@ -89,7 +84,6 @@ class ParamDE(Algorithm):
         # 2. Crossover
         CR_tensor = torch.ones(pop_size, device=device) * self.cross_probability
 
-
         trial_vectors = torch.where(
             self.cross_strategy.eq(0),
             DE_binary_crossover(mutation_vector, current_vect, CR_tensor),
@@ -99,7 +93,7 @@ class ParamDE(Algorithm):
                 torch.where(
                     self.cross_strategy.eq(2),
                     DE_arithmetic_recombination(mutation_vector, current_vect, CR_tensor),
-                    mutation_vector  # 默认回退为突变向量
+                    mutation_vector
                 )
             )
         )
@@ -110,10 +104,5 @@ class ParamDE(Algorithm):
         new_fit = self.evaluate(trial_vectors)
         compare = new_fit < self.fit
 
-        # 更新种群和适应度
         self.pop = torch.where(compare.unsqueeze(1), trial_vectors, self.pop)
         self.fit = torch.where(compare, new_fit, self.fit)
-
-
-
-
