@@ -1,6 +1,6 @@
 import torch
 from evox.core import Algorithm, Mutable, Parameter
-from util import clamp
+from util import clamp, switch
 from util.operators.crossover import (
     DE_differential_sum,
     DE_arithmetic_recombination,
@@ -84,18 +84,13 @@ class ParamDE(Algorithm):
         # 2. Crossover
         CR_tensor = torch.ones(pop_size, device=device) * self.cross_probability
 
-        trial_vectors = torch.where(
-            self.cross_strategy.eq(0),
-            DE_binary_crossover(mutation_vector, current_vect, CR_tensor),
-            torch.where(
-                self.cross_strategy.eq(1),
+        trial_vectors = switch(
+            self.cross_strategy,
+            [
+                DE_binary_crossover(mutation_vector, current_vect, CR_tensor),
                 DE_exponential_crossover(mutation_vector, current_vect, CR_tensor),
-                torch.where(
-                    self.cross_strategy.eq(2),
-                    DE_arithmetic_recombination(mutation_vector, current_vect, CR_tensor),
-                    mutation_vector
-                )
-            )
+                DE_arithmetic_recombination(mutation_vector, current_vect, CR_tensor),
+            ]
         )
 
         trial_vectors = clamp(trial_vectors, self.lb, self.ub)

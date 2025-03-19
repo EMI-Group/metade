@@ -30,10 +30,7 @@ inner_algo = ParamDE(Inner_Population, -100 * torch.ones(Dim), 100 * torch.ones(
 inner_prob = Sphere()
 
 inner_monitor = HPOFitnessMonitor()
-inner_monitor.setup()
-
-inner_workflow = StdWorkflow()
-inner_workflow.setup(inner_algo, inner_prob, monitor=inner_monitor)
+inner_workflow = StdWorkflow(algorithm=inner_algo, problem=inner_prob, monitor=inner_monitor)
 
 # ============================
 # Transform Inner Workflow into an HPO Problem
@@ -47,14 +44,14 @@ params = hpo_prob.get_init_params()
 # ============================
 # Initialize Hyperparameters for HPO Instances
 # ============================
-params["self.algorithm.differential_weight"] = torch.nn.Parameter(torch.rand(HPO_Instances, 1), requires_grad=False)
-params["self.algorithm.cross_probability"] = torch.nn.Parameter(torch.rand(HPO_Instances, 1), requires_grad=False)
-params["self.algorithm.basevect_prim_type"] = torch.nn.Parameter(torch.randint(0, 4, (HPO_Instances,)),
-                                                                 requires_grad=False)
-params["self.algorithm.basevect_sec_type"] = torch.nn.Parameter(torch.randint(0, 4, (HPO_Instances,)),
-                                                                requires_grad=False)
-params["self.algorithm.num_diff_vects"] = torch.nn.Parameter(torch.randint(1, 5, (HPO_Instances,)), requires_grad=False)
-params["self.algorithm.cross_strategy"] = torch.nn.Parameter(torch.randint(0, 3, (HPO_Instances,)), requires_grad=False)
+params["algorithm.differential_weight"] = torch.nn.Parameter(torch.rand(HPO_Instances, 1), requires_grad=False)
+params["algorithm.cross_probability"] = torch.nn.Parameter(torch.rand(HPO_Instances, 1), requires_grad=False)
+params["algorithm.basevect_prim_type"] = torch.nn.Parameter(torch.randint(0, 4, (HPO_Instances,)),
+                                                            requires_grad=False)
+params["algorithm.basevect_sec_type"] = torch.nn.Parameter(torch.randint(0, 4, (HPO_Instances,)),
+                                                           requires_grad=False)
+params["algorithm.num_diff_vects"] = torch.nn.Parameter(torch.randint(1, 5, (HPO_Instances,)), requires_grad=False)
+params["algorithm.cross_strategy"] = torch.nn.Parameter(torch.randint(0, 3, (HPO_Instances,)), requires_grad=False)
 
 
 # ============================
@@ -63,12 +60,12 @@ params["self.algorithm.cross_strategy"] = torch.nn.Parameter(torch.randint(0, 3,
 class SolutionTransform(torch.nn.Module):
     def forward(self, x: torch.Tensor):
         return {
-            "self.algorithm.differential_weight": x[:, 0],
-            "self.algorithm.cross_probability": x[:, 1],
-            "self.algorithm.basevect_prim_type": x[:, 2].floor().long(),
-            "self.algorithm.basevect_sec_type": x[:, 3].floor().long(),
-            "self.algorithm.num_diff_vects": x[:, 4].floor().long(),
-            "self.algorithm.cross_strategy": x[:, 5].floor().long(),
+            "algorithm.differential_weight": x[:, 0],
+            "algorithm.cross_probability": x[:, 1],
+            "algorithm.basevect_prim_type": x[:, 2].floor().long(),
+            "algorithm.basevect_sec_type": x[:, 3].floor().long(),
+            "algorithm.num_diff_vects": x[:, 4].floor().long(),
+            "algorithm.cross_strategy": x[:, 5].floor().long(),
         }
 
 
@@ -82,8 +79,8 @@ param_ub = torch.tensor([1, 1, 4 - tiny_num, 4 - tiny_num, 5 - tiny_num, 3 - tin
 outer_algo = DE(Outer_Population, param_lb, param_ub)
 monitor = EvalMonitor(full_sol_history=False)
 
-outer_workflow = StdWorkflow()
-outer_workflow.setup(outer_algo, hpo_prob, monitor=monitor, solution_transform=SolutionTransform())
+outer_workflow = StdWorkflow(algorithm=outer_algo, problem=hpo_prob, monitor=monitor,
+                             solution_transform=SolutionTransform())
 
 # ============================
 # Run Optimization for Outer Iterations

@@ -1,21 +1,10 @@
 from typing import Tuple
 
 import torch
-from util.core import _vmap_fix
-def minimum_int(a: torch.Tensor, b: int) -> torch.Tensor:
-    """
-    Element-wise minimum of input tensor `a` and int `b`.
 
-    Notice: This is a fix function for [`torch.minimum`](https://pytorch.org/docs/stable/generated/torch.minimum.html)
-    since it is not supported in JIT operator fusion.
+from evox.utils import minimum_int
 
-    :param a: The first input tensor.
-    :param b: The second input int, which is a scalar value.
 
-    :return: The element-wise minimum of `a` and `b`.
-    """
-    diff = torch.relu(a - b)
-    return a - diff
 def DE_differential_sum(
     diff_padding_num: int, num_diff_vectors: torch.Tensor, index: torch.Tensor, population: torch.Tensor
 ) -> Tuple[torch.Tensor, torch.Tensor]:
@@ -36,16 +25,11 @@ def DE_differential_sum(
 
     select_len = num_diff_vectors.unsqueeze(1) * 2 + 1
     rand_indices = torch.randint(0, pop_size, (pop_size, diff_padding_num), device=device)
-    rand_indices = torch.where(rand_indices == index.unsqueeze(1), torch.tensor(pop_size - 1, device=device), rand_indices)
+    rand_indices = torch.where(rand_indices == index.unsqueeze(1), pop_size - 1, rand_indices)
 
-    # pop_permute = population[rand_indices]
-    # TEMP START
-    pop_permute = population.index_select(0, rand_indices.flatten())#.unflatten(0, (pop_size, diff_padding_num))
-    pop_permute = _vmap_fix.unwrap_batch_tensor(pop_permute)[0].unflatten(1, (pop_size, diff_padding_num))
-    pop_permute = _vmap_fix.wrap_batch_tensor(pop_permute, (0,))
-    # TEMP END
+    pop_permute = population[rand_indices]
     mask = torch.arange(diff_padding_num, device=device).unsqueeze(0) < select_len
-    pop_permute_padding = torch.where(mask.unsqueeze(2), pop_permute, torch.zeros_like(pop_permute))
+    pop_permute_padding = torch.where(mask.unsqueeze(2), pop_permute, 0)
 
     diff_vectors = pop_permute_padding[:, 1:]
     difference_sum = diff_vectors[:, 0::2].sum(dim=1) - diff_vectors[:, 1::2].sum(dim=1)

@@ -4,10 +4,9 @@ from typing import List, Optional
 
 import torch
 
-from evox.core import Problem, jit_class
+from evox.core import Problem
 
 
-@jit_class
 class CEC2022(Problem):
     """The CEC 2022 single-objective test suite Problem"""
 
@@ -15,14 +14,12 @@ class CEC2022(Problem):
         """
         Initialize a single test function instance from the CEC2022 test suite.
 
-        Args:
-            problem_number (`int`): The index for the specific test function to be used. Must be ranged from 1 to 12.
-            dimension (`int`): The dimensionality of the problem. Must be one of [2, 10, 20].
-            device (`torch.device`, optional): The device on which tensors will be allocated. Defaults to None.
+        :param problem_number: The index for the specific test function to be used. Must be ranged from 1 to 12.
+        :param dimension (`int`): The dimensionality of the problem. Must be one of [2, 10, 20].
+        :param device (`torch.device`, optional): The device on which tensors will be allocated. Defaults to None.
 
-        Raises:
-            AssertionError: If the dimension is not one of the allowed values or if the function is not defined.
-            FileNotFoundError: If the necessary data files for the problem are not found.
+        :raises AssertionError: If the dimension is not one of the allowed values or if the function is not defined.
+        :raises FileNotFoundError: If the necessary data files for the problem are not found.
         """
         super().__init__()
         self.nx = dimension
@@ -84,7 +81,6 @@ class CEC2022(Problem):
 
     def cut(
         self, x: torch.Tensor, Gp: List[float], sh_flag: bool, rot_flag: bool, offset: torch.Tensor, M: torch.Tensor
-
     ) -> List[torch.Tensor]:
         nx = x.size(1)
         G_nx = [ceil(g * nx) for g in Gp]
@@ -218,7 +214,9 @@ class CEC2022(Problem):
                 self.sr_func_rate(x, 1.0, True, True, self.OShift[:, 2 * nx : 3 * nx], self.M[:, 2 * nx : 3 * nx])
             )
             * 10000
-            / 1e10 / 1e10 / 1e10,
+            / 1e10
+            / 1e10
+            / 1e10,
             # if divide by 1e30 , cause NVRTC compilation error(https://github.com/pytorch/pytorch/issues/62962)
             self.discus_func(self.sr_func_rate(x, 1.0, True, True, self.OShift[:, 3 * nx : 4 * nx], self.M[:, 3 * nx : 4 * nx]))
             * 10000
@@ -312,7 +310,9 @@ class CEC2022(Problem):
                 self.sr_func_rate(x, 1.0, True, True, self.OShift[:, 3 * nx : 4 * nx], self.M[:, 3 * nx : 4 * nx])
             )
             * 10000
-            / 1e10 / 1e10 / 1e10,
+            / 1e10
+            / 1e10
+            / 1e10,
             # if divide by 1e30 , cause NVRTC compilation error(https://github.com/pytorch/pytorch/issues/62962)
             self.ellips_func(self.sr_func_rate(x, 1.0, True, True, self.OShift[:, 4 * nx : 5 * nx], self.M[:, 4 * nx : 5 * nx]))
             * 10000
