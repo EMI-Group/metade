@@ -29,10 +29,20 @@
 
 MetaDE is an advanced evolutionary framework that dynamically optimizes the strategies and hyperparameters of Differential Evolution (DE) through meta-level evolution. By leveraging DE to fine-tune its own configurations, MetaDE adapts mutation and crossover strategies to suit varying problem landscapes in real-time. With GPU acceleration, it handles large-scale, complex black-box optimization problems efficiently, delivering faster convergence and superior performance. MetaDE is compatible with the <a href="https://github.com/EMI-Group/evox">EvoX</a> framework.
 
-> **New in this version**:  
-> MetaDE now supports both **JAX** and **PyTorch** backends.  
-> - If you want to run **PyTorch-based** code, please install the GPU-enabled PyTorch (if GPU acceleration is desired) along with EvoX == **1.0.1**.  
-> - Important: The PyTorch version currently does **not** support Brax-based RL tasks. If you need Brax support (or wish to use the version from the paper experiments), please use the JAX backend with a CUDA-enabled JAX (and Brax) installation.
+> **New in this version**:
+>
+> MetaDE now fully supports both **JAX** and **PyTorch** backends.
+>
+> - **PyTorch backend updates:**
+>   - Now supports **Brax-based RL tasks**(requires additional installation of JAX).
+>   - Significant performance improvements when used with **EvoX v1.1.1**, achieving up to **2x speedup** compared to previous versions.
+>   - Strongly recommended to use **EvoX 1.1.1** and GPU-enabled PyTorch for optimal performance.
+>
+> - **JAX backend:**
+>   - Remains fully supported and recommended if you prefer CUDA-enabled JAX.
+>   - Generally offers approximately **2x the speed** compared to the PyTorch backend.
+
+To replicate experiments from the paper exactly, you may still opt for the JAX backend with a CUDA-enabled JAX (and Brax) installation.
 
 ## Features
 
@@ -83,12 +93,12 @@ The following animations show the behaviors in Brax environments:
 Depending on which backend you plan to use (JAX or PyTorch), you should install the proper libraries and GPU dependencies:
 
 - **Common**:
-  - [evox](https://github.com/EMI-Group/evox) (version **== 1.0.1** for PyTorch support)
+  - [evox](https://github.com/EMI-Group/evox) (version **== 1.1.1** for PyTorch support)
+  - `brax == 0.10.3` (optional, if you want to run Brax RL problems)
   
 - **JAX**-based version:
   - `jax >= 0.4.16`
   - `jaxlib >= 0.3.0`
-  - `brax == 0.10.3` (optional, if you want to run Brax RL problems)
 
 - **PyTorch**-based version:
   - `torch` (GPU version recommended, e.g. `torch>=2.5.0`)
@@ -104,14 +114,19 @@ Below are some example installation steps; please adapt versions as needed:
 1. **Install [PyTorch](https://pytorch.org/get-started/locally/)** (with CUDA, if you want GPU acceleration). For example, if you have CUDA 12.4, you might do:
    ```bash
    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-2. **Install EvoX == 1.0.1** (for PyTorch support):
+2. **Install EvoX == 1.1.1** (for PyTorch support):
    ```bash
-   pip install git+https://github.com/EMI-Group/evox.git@v1.0.1
+   pip install git+https://github.com/EMI-Group/evox.git@v1.1.1
 3. **Install MetaDE**:
    ```bash
    pip install git+https://github.com/EMI-Group/metade.git
    ```
-
+4. **Install Brax**(Optional, if you want to solve Brax RL problems, also requires JAX installation):):
+   ```bash
+   pip install brax==0.10.3
+   pip install -U jax[cuda12]
+   ```
+   
 ### Option B: Install for JAX Only
 
 1. **Install [JAX](https://github.com/google/jax)**. We recommend `jax >= 0.4.16`.
@@ -125,9 +140,9 @@ Below are some example installation steps; please adapt versions as needed:
     pip install -U jax[cuda12]
     ```
     For details of installing jax, please check https://github.com/google/jax.
-2. **Install EvoX == 1.0.1** (for PyTorch support):
+2. **Install EvoX == 1.1.1** (for PyTorch support):
    ```bash
-   pip install git+https://github.com/EMI-Group/evox.git@v1.0.1
+   pip install git+https://github.com/EMI-Group/evox.git@v1.1.1
 3. **Install MetaDE**:
    ```bash
    pip install git+https://github.com/EMI-Group/metade.git
@@ -419,7 +434,7 @@ for i in tqdm(range(steps)):
 
 print(f"Best fitness: {monitor.get_best_fitness()}")
 ```
-> Pytorch-based MetaDE does not support Brax problem yet currently.
+> If you want to use the PyTorch backend, please refer to the PyTorch examples under `examples/pytorch/example_brax.py` in this repository.
 
 
 ## Community & Support
