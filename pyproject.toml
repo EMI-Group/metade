@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "metade"
+version = "0.1.0"
+authors = [
+  { name = "Chenchen Feng", email = "chenchenfengcn@gmail.com" },
+]
+description = "metade"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+  "torch >= 2.5.0",
+  "evox == 1.1.1",
+]
+
+[project.optional-dependencies]
+
+neuroevolution = [
+  "brax >= 0.10.3",
+]
+
+test = [
+  "brax >= 0.10.3",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/EMI-Group/metade"
+"Bug Tracker" = "https://github.com/EMI-Group/metade/issues"
