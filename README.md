@@ -181,9 +181,9 @@ import jax.numpy as jnp
 import jax
 from tqdm import tqdm
 
-from util import StdSOMonitor, StdWorkflow
-from algorithms.jax import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
-from problems.jax.sphere import Sphere
+from metade.util import StdSOMonitor, StdWorkflow
+from metade.algorithms.jax import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
+from metade.problems.jax.sphere import Sphere
 
 D = 10
 BATCH_SIZE = 100
@@ -266,12 +266,12 @@ MetaDE supports several benchmark suites such as CEC2022. Here’s an example (J
 import jax.numpy as jnp
 import jax
 from tqdm import tqdm
-from util import (
+from metade.util import (
     StdSOMonitor,
     StdWorkflow
 )
-from algorithms.jax import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
-from problems.jax import CEC2022TestSuit
+from metade.algorithms.jax import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
+from metade.problems.jax import CEC2022TestSuit
 
 D = 10 
 FUNC_LIST = jnp.arange(12) + 1
@@ -351,14 +351,14 @@ for func_num in FUNC_LIST:
 MetaDE can also be used for real-world tasks like robotic control through evolutionary reinforcement learning. Note that running these examples requires installing CUDA-enabled JAX and `brax==0.10.3`.
 ```python
 from tqdm import tqdm
-import problems
+import metade.problems
 from jax import random
 from flax import linen as nn
 import jax.numpy as jnp
 import jax
 
-from util import StdSOMonitor, StdWorkflow, TreeAndVector, parse_opt_direction
-from algorithms.jax import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
+from metade.util import StdSOMonitor, StdWorkflow, TreeAndVector, parse_opt_direction
+from metade.algorithms.jax import create_batch_algorithm, decoder_de, MetaDE, ParamDE, DE
 
 steps = 20
 pop_size = 100
@@ -399,7 +399,7 @@ batch_de = BatchDE(
     pop_size=100,
 )
 
-base_problem = problems.jax.Brax(
+base_problem = metade.problems.jax.Brax(
     env_name="hopper",
     policy=jax.jit(model.apply),
     cap_episode=500,

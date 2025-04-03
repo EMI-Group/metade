@@ -24,8 +24,8 @@ import jax
 import jax.numpy as jnp
 from jax import lax
 
-from util import Algorithm, State, jit_class
-from algorithms.jax.sort_utils import sort_by_key
+from metade.util import Algorithm, State, jit_class
+from metade.algorithms.jax.sort_utils import sort_by_key
 
 
 @jit_class

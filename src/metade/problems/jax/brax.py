@@ -5,7 +5,7 @@ import jax
 from jax import jit, vmap
 import jax.numpy as jnp
 from jax.tree_util import tree_leaves
-from util import Problem, State, jit_method
+from metade.util import Problem, State, jit_method
 
 
 class Brax(Problem):

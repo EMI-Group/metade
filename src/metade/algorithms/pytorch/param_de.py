@@ -1,13 +1,13 @@
 import torch
 from evox.core import Algorithm, Mutable, Parameter
-from util import clamp, switch
-from util.operators.crossover import (
+from metade.util import clamp, switch
+from metade.util.operators.crossover import (
     DE_differential_sum,
     DE_arithmetic_recombination,
     DE_binary_crossover,
     DE_exponential_crossover,
 )
-from util.operators.selection import select_rand_pbest
+from metade.util.operators.selection import select_rand_pbest
 
 
 class ParamDE(Algorithm):

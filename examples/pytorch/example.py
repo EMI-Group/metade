@@ -1,8 +1,8 @@
 import torch
-from algorithms.pytorch.de import DE
-from algorithms.pytorch.param_de import ParamDE
-from problems.torch.hpo_wrapper import HPOFitnessMonitor, HPOProblemWrapper
-from util.workflows import EvalMonitor, StdWorkflow
+from metade.algorithms.pytorch.de import DE
+from metade.algorithms.pytorch.param_de import ParamDE
+from metade.problems.torch.hpo_wrapper import HPOFitnessMonitor, HPOProblemWrapper
+from metade.util.workflows import EvalMonitor, StdWorkflow
 from evox.problems.numerical import Sphere  # you can import any problem from evox.problems
 from tqdm import tqdm
 

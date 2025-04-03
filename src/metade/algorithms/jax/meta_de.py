@@ -3,9 +3,9 @@ from jax.lax import reduce
 import jax.numpy as jnp
 from jax.tree_util import tree_map
 from jax import vmap
-from util import parse_opt_direction
+from metade.util import parse_opt_direction
 
-from util import (
+from metade.util import (
     Problem,
     State,
     jit_class,

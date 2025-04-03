@@ -4,7 +4,7 @@ import jax
 import jax.numpy as jnp
 from jax import jit, lax, random
 
-from util import jit_class
+from metade.util import jit_class
 
 
 def _de_mutation(x1, x2, x3, F):

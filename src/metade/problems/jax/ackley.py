@@ -1,7 +1,7 @@
 from functools import partial
 import jax
 import jax.numpy as jnp
-from util import Problem, dataclass, pytree_field
+from metade.util import Problem, dataclass, pytree_field
 from dataclasses import field
 
 def _ackley_func(a, b, c, x):

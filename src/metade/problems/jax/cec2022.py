@@ -1,6 +1,6 @@
 import jax.numpy as jnp
 from functools import partial
-from util import Problem, jit_class
+from metade.util import Problem, jit_class
 from jax import lax, vmap
 import pkgutil
 

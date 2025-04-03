@@ -2,12 +2,12 @@ import torch
 import torch.nn as nn
 from tqdm import tqdm
 
-from algorithms.pytorch.de import DE
-from algorithms.pytorch.param_de import ParamDE
-from problems.torch.hpo_wrapper import HPOFitnessMonitor, HPOProblemWrapper
-from problems.torch.brax import BraxProblem
-from util.workflows import EvalMonitor, StdWorkflow
-from util import ParamsAndVector
+from metade.algorithms.pytorch.de import DE
+from metade.algorithms.pytorch.param_de import ParamDE
+from metade.problems.torch.hpo_wrapper import HPOFitnessMonitor, HPOProblemWrapper
+from metade.problems.torch.brax import BraxProblem
+from metade.util.workflows import EvalMonitor, StdWorkflow
+from metade.util import ParamsAndVector
 
 torch.set_float32_matmul_precision('high')
 # ==============================

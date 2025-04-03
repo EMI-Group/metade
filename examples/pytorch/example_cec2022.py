@@ -1,11 +1,11 @@
 import torch
 
 torch._dynamo.config.cache_size_limit = 128
-from algorithms.pytorch.de import DE
-from algorithms.pytorch.param_de import ParamDE
-from problems.torch.hpo_wrapper import HPOFitnessMonitor, HPOProblemWrapper
-from util.workflows import EvalMonitor, StdWorkflow
-from problems.torch.cec2022 import CEC2022  # Follow the original code, fitness minimum is 300, 400...
+from metade.algorithms.pytorch.de import DE
+from metade.algorithms.pytorch.param_de import ParamDE
+from metade.problems.torch.hpo_wrapper import HPOFitnessMonitor, HPOProblemWrapper
+from metade.util.workflows import EvalMonitor, StdWorkflow
+from metade.problems.torch.cec2022 import CEC2022  # Follow the original code, fitness minimum is 300, 400...
 from tqdm import tqdm
 
 torch.set_float32_matmul_precision('high')

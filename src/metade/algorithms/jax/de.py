@@ -2,7 +2,7 @@ from functools import partial
 import jax
 import jax.numpy as jnp
 from jax import vmap, lax
-from util import Algorithm, State, jit_class
+from metade.util import Algorithm, State, jit_class
 
 
 @jit_class

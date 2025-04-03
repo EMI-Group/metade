@@ -7,7 +7,7 @@ import jax.numpy as jnp
 from jax import jit, vmap
 from jax.tree_util import tree_flatten, tree_leaves, tree_unflatten
 
-from util.core.module import *
+from metade.util.core import *
 
 
 def algorithm_has_init_ask(algorithm, state):

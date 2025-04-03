@@ -2,13 +2,13 @@ import jax
 import jax.numpy as jnp
 from jax import vmap, lax
 
-from util import (
+from metade.util import (
     Algorithm,
     State,
     jit_class,
 )
-from util import select_rand_pbest
-from util import (
+from metade.util import select_rand_pbest
+from metade.util import (
     de_diff_sum,
     de_arith_recom,
     de_bin_cross,

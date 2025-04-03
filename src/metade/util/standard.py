@@ -1,7 +1,7 @@
 from typing import Callable, Dict, Optional, Union, List
 
-from util import Algorithm, Problem, Stateful, State
-from util.common import parse_opt_direction, algorithm_has_init_ask
+from metade.util import Algorithm, Problem, Stateful, State
+from metade.util.common import parse_opt_direction, algorithm_has_init_ask
 
 
 class StdWorkflow(Stateful):
