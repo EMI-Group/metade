@@ -1,24 +1,11 @@
 <h1 align="center">
-  <a href="https://github.com/EMI-Group/evox">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/evox_logo_dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/evox_logo_light.png">
-      <img alt="EvoX Logo" height="50" src="./assets/evox_logo_light.png">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/evox_brand_dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/evox_brand_dark.svg">
+    <img alt="EvoX Logo" height="128" width="500px" src="./assets/evox_brand_dark.svg">
   </picture>
-  </a>
-  <br>
 </h1>
 
-<!--
-<p align="center">
-  <picture>
-    <img src="./assets/D10_3.svg" alt="" height="300">
-  </picture>
-  <picture>
-    <img src="./assets/brax_all_convergence.svg" alt="" height="300">
-  </picture>
-</p>
--->
 
 <h2 align="center">
   <p>🌟 MetaDE: Evolving Differential Evolution by Differential Evolution 🌟</p>
